@@ -1,0 +1,28 @@
+{
+  "name": "sailbot",
+  "version": "0.1.0",
+  "description": "Send me an email when new sailboats matching my criteria are listed on sailboatlistings.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natpen/sailbot.git"
+  },
+  "author": "Natalie Pendragon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/natpen/sailbot/issues"
+  },
+  "homepage": "https://github.com/natpen/sailbot#readme",
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "dotenv": "^2.0.0",
+    "lodash": "^4.0.0",
+    "moment": "^2.11.1",
+    "nodemailer": "^2.0.0",
+    "prettyjson": "^1.1.3",
+    "request": "^2.61.0"
+  }
+}
