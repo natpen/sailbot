@@ -17,6 +17,10 @@ If you want to trigger a run immediately after installation and get your sailboa
 
 `launchctl load ~/Library/LaunchAgents/local.sailbot.plist`
 
+### Bonus points: centralize your launchd configurations!
+
+I provided `local.sailbot.plist.example` in this repository to help get things running, but for better better organization of launchd tasks, I've started centralizing and managing launchd task configurations and log output in [their own repository](https://github.com/natpen/launchd). Check it out for more details!
+
 ### Changing the filter criteria
 
 You can easily change the filtering criteria towards the bottom of `index.js` if you'd like! Look in the `listingMatchesCriteria` function for the relevant logic.
