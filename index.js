@@ -13,7 +13,7 @@ var searchUrl = 'http://www.sailboatlistings.com/cgi-bin/saildata/db.cgi?db=defa
 
 var lastSearchDate = moment().subtract(1, 'month'); // if no lastSearchDate found, default to a month ago
 
-return setTimeout(function() { return main(); }, 15000);
+return setTimeout(function() { return main(); }, 30000);
 
 function main() {
 	return fs.access('.lastSearchDate', fs.F_OK | fs.R_OK, function(err) {
