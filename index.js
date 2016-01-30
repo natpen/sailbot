@@ -17,7 +17,7 @@ return setTimeout(function() { return main(); }, 30000);
 
 function main() {
 	return fs.access('.lastSearchDate', fs.F_OK | fs.R_OK, function(err) {
-		if (!err) lastSearchDate = moment(fs.readFileSync('.lastSearchDate'));
+		if (!err) lastSearchDate = moment(new Date(fs.readFileSync('.lastSearchDate')));
 
 		console.log('\n[' + moment().format(), '] Starting new run...');
 		console.log('Last search date:', lastSearchDate.format());
