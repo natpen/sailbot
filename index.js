@@ -30,7 +30,7 @@ function main() {
 		// it, when in fact we haven't. this strategy adds risk of duping anything between midnight and
 		// runtime, so you should try and run this as early in the day as possible to minimize that
 		// risk.
-		lastSearchDate = lastSearchDate.subtract(1, 'day');
+		lastSearchDate.subtract(1, 'day');
 
 		return getListings(1, [], function(err, listings) {
 			if (err) throw err;
@@ -39,7 +39,7 @@ function main() {
 			fs.writeFileSync('.lastSearchDate', moment().format());
 
 			var filteredListings = listings.filter(function(listing) {
-				return shouldFilterListing(listing);
+				return listingMatchesCriteria(listing);
 			});
 
 			console.log(filteredListings.length + ' new matches.')
@@ -81,10 +81,10 @@ function getListings(page, listings, cb) {
 			var filteredCurrentPageListings = currentPageListings.filter(function(listing) {
 				return moment(listing.dateAdded) > lastSearchDate;
 			});
-			console.log('Page ' + page + ' (' + filteredCurrentPageListings.length + ' listings processed) [last page searched]');
+			console.log('Page ' + page + ' (' + filteredCurrentPageListings.length + '/' + currentPageListings.length + ' listings processed) [last page searched]');
 			return cb(null, listings.concat(filteredCurrentPageListings));
 		} else {
-			console.log('Page ' + page + ' (' + currentPageListings.length + ' listings processed)');
+			console.log('Page ' + page + ' (' + currentPageListings.length + '/' + currentPageListings.length + ' listings processed)');
 
 			// let's be nice and wait 30 seconds between pages. I manually checked their robots.txt, and this
 			// was the longest Crawl-delay they had set for anyone. Given the number of daily additions, we're
@@ -96,13 +96,13 @@ function getListings(page, listings, cb) {
 	});
 }
 
-function shouldFilterListing(listing) {
+function listingMatchesCriteria(listing) {
 
 	// title (manufacturer)
 	if (!listing.title.match(/alberg|amel|bristol|cape dory|cheoy lee|hallberg rassy|hans christian|pacific seacraft|pearson|slocum|tayana|westsail/i)) return false;
 
 	// length
-	if (!listing.length < 20) return false;
+	if (listing.length < 20 || listing.length > 50) return false;
 
 	// price
 	if (!listing.price || listing.price > 80000) return false;
