@@ -115,11 +115,11 @@ function listingMatchesCriteria(listing) {
 
 function sendEmailDigest(listings, cb) {
 
-	var transporter = nodemailer.createTransport('smtps://' + process.env.GMAIL_ADDRESS.replace('@', '%40') + ':' + process.env.GOOGLE_PW + '@smtp.gmail.com');
+	var transporter = nodemailer.createTransport('smtps://' + process.env.FROM_GMAIL_ADDRESS.replace('@', '%40') + ':' + process.env.FROM_GMAIL_PW + '@smtp.gmail.com');
 
 	var mailOptions = {
-		from: process.env.GMAIL_ADDRESS,
-		to: process.env.GMAIL_ADDRESS,
+		from: process.env.FROM_GMAIL_ADDRESS,
+		to: process.env.TO_GMAIL_ADDRESS,
 		subject: 'New Sailboat Matches!',
 		text: prettyjson.render(listings, { noColor: true }),
 		html: ''
